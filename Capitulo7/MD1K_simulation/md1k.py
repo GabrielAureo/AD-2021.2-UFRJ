@@ -92,6 +92,16 @@ def mean_wait(ledger):
 
   return return_data 
 
+def utilization(ledger):
+  holdings = ledger.groupby('run').holding.mean()
+  ci = confidence_interval(holdings)
+  return_data = {
+    'mean' : holdings.mean(),
+    'ci' : ci,
+  }
+
+  return return_data 
+
 def confidence_interval(samples, confidence_rate = 1.95):
   x = samples.mean()
   n = samples.count()
